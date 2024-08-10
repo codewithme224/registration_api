@@ -17,11 +17,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'full_name',
-        'phone_number',
+        'name',
+        'phone',
         'email',
         'business_name',
+        'address',
+        'logo',
+        'package_id',
         'user_type_id',
         'referral_code_id',
         'country_id',
@@ -41,6 +43,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->attributes['name'];
+    }
 
     protected $appends = [
         'name'

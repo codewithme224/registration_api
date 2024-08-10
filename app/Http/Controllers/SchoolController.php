@@ -17,7 +17,8 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        return response()->success(SchoolResource::collection(User::with('package')->get()));
+        $schools = User::with('package')->get();
+        return response()->success(SchoolResource::collection($schools));
     }
 
     /**
@@ -42,8 +43,7 @@ class SchoolController extends Controller
         }
 
         // Get the selected package
-        $package = Package::findOrFail($request->package_id);
-
+        $package = Package::findOrFail($data['package_id']);
 
         // Create the school in the central database
         $school = User::create([
@@ -53,9 +53,7 @@ class SchoolController extends Controller
             'phone' => $data['phone'],
             'logo' => $logoPath,
             'package_id' => $package->id,
-            
         ]);
-
 
         return response()->success(new SchoolResource($school));
     }
@@ -92,6 +90,7 @@ class SchoolController extends Controller
         }
 
         $user->update($data);
+
         return response()->success(new SchoolResource($user));
     }
 
@@ -106,6 +105,7 @@ class SchoolController extends Controller
         }
 
         $user->delete();
+
         return response()->deleted();
     }
 }

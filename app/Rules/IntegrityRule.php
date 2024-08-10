@@ -24,7 +24,7 @@ class IntegrityRule implements ImplicitRule
 
     public function passes($attribute, $value)
     {
-        if ($this->column === 'phone_number') {
+        if ($this->column === 'phone') {
             $value = ltrim($value, '0');
         }
 
