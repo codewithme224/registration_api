@@ -28,7 +28,7 @@ class RegistrationRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:8', 'max:20', Rules\Password::defaults()],
             'address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'min:10', 'max:20', new IntegrityRule('unique', 'users', 'phone')],
-            'package_id' => ['required', 'exists:packages,id'],
+            // 'package_id' => ['required', 'exists:packages,id'],
             'logo' => ['nullable', 'image', 'max:1024'],
         ];
     }
@@ -55,8 +55,8 @@ class RegistrationRequest extends FormRequest
             'phone.min' => 'Phone Number must be at least 10 characters',
             'phone.max' => 'Phone Number must not be greater than 20 characters',
             'phone.digits' => 'Phone Number must be a valid phone number',
-            'package_id.required' => 'Package is required',
-            'package_id.exists' => 'Package does not exist',
+            // 'package_id.required' => 'Package is required',
+            // 'package_id.exists' => 'Package does not exist',
             'logo.image' => 'Institution Logo must be an image',
             'logo.max' => 'Institution Logo must not be greater than 1MB',
         ];

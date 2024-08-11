@@ -19,7 +19,7 @@ class AuthController extends Controller
 
     /**
      * Register New Users.
-     * @param 
+     * @param
      */
     public function register(RegistrationRequest $request)
     {
@@ -32,7 +32,7 @@ class AuthController extends Controller
         }
 
         // Get the selected package
-        $package = Package::findOrFail($data['package_id']);
+        // $package = Package::findOrFail($data['package_id']);
 
         // Create the user
         $user = User::create([
@@ -41,7 +41,7 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
             'phone' => $data['phone'],
-            'package_id' => $package->id,
+            // 'package_id' => $package->id,
             'logo' => $logoPath,
         ]);
 
@@ -49,13 +49,13 @@ class AuthController extends Controller
         $this->logAudit('User created', $user->id, 'users', $user->toArray());
 
         return response()->success(new SchoolResource($user));
-        
+
 
     }
 
     /**
      * Login user.
-     * @param 
+     * @param
      */
     public function login(LoginRequest $request)
     {
@@ -77,7 +77,7 @@ class AuthController extends Controller
 
         // Audit the user login
         $this->logAudit('User logged in', $user->id, 'users', $user->toArray());
-      
+
         return response()->success($data);
     }
 
@@ -93,16 +93,16 @@ class AuthController extends Controller
 
        if (!$user) {
            return response()->unprocessable('User not found', 404);
-        } 
+        }
 
         // Audit the user details fetch
         $this->logAudit('User details fetched', $user->id, 'users', $user->toArray());
 
         return response()->success($request->user());
     }
-   
 
-   
+
+
 
     /**
      * Logout User.
@@ -137,7 +137,7 @@ class AuthController extends Controller
     public function resetPassword()
     {
         // Reset password logic
-        
+
 
 
     }
