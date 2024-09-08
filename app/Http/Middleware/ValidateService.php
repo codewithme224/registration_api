@@ -20,7 +20,7 @@ class ValidateService
     {
         $service = AppService::where(["name" => $request->service_name, "key" => $request->service_key])->first();
         if (!$service) {
-            return response()->unprocessable('Invalid KedebahService credentials');
+            return response()->unprocessable('Invalid AppService credentials');
         }
 
         return $next($request);
